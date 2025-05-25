@@ -24,18 +24,22 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        name= request.form['name']
         
         try:
             # Registrar usuario en Supabase Auth
             user = supabase.auth.sign_up({
                 "email": email,
-                "password": password
+                "password": password,
+                "nombre": name,
             })
             
             # Insertar usuario en la tabla 'users' (opcional)
             response = supabase.table('login').insert({
                 "email": email,
-                "password": password  # Almacenar la contraseña de forma segura
+                "password": password,
+                "nombre": name,
+                # Almacenar la contraseña de forma segura
                 # No almacenar contraseñas en texto plano en producción
                 # Usar Supabase Auth para manejar autenticación
             }).execute()
