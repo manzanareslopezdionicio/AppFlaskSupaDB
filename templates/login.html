@@ -2,6 +2,7 @@
 
 {% block title %}Iniciar sesión{% endblock %}
 
+
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6">
@@ -13,12 +14,13 @@
                 <form method="POST" action="{{ url_for('login') }}">
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" id="email" name="email" required autofocus>
+                        <input type="email" class="form-control" id="email" name="email" required autofocus >
                     </div>
+                    
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" required data-toggle="password">
-
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <i class="bi bi-eye-slash-fill" id="topass"></i>
 
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
@@ -30,5 +32,7 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/bootstrap-show-password@1.3.0/dist/bootstrap-show-password.min.js"></script>
+
 {% endblock %}
