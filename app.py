@@ -1,6 +1,6 @@
 #import os
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
-from supabase import create_client, Client
+from supabase import create_client, Client # type: ignore
 from config import Config
 
 app = Flask(__name__)
