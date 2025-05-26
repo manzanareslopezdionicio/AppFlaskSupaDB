@@ -84,6 +84,35 @@ def logout():
     flash('Has cerrado sesión correctamente.', 'info')
     return redirect(url_for('login'))
 
+@app.route('/inicio')
+def inicio():
+    return render_template('inicio.html')
+
+
+@app.route('/maestro')
+def maestro():
+    return render_template('/vistas/maestro.html')
+
+@app.route('/estudiante')
+def estudiante():
+    return render_template('/vistas/estudiante.html')
+
+@app.route('/componente')
+def componente():
+    return render_template('/vistas/componente.html')
+
+@app.route('/carrera')
+def carrera():
+    return render_template('/vistas/carrera.html')
+
+@app.route('/rubrica')
+def rubrica():
+    return render_template('/vistas/rubrica.html')
+
+@app.route("/grupo")
+def grupo():
+    return render_template("/vistas/grupo.html")
+
 if __name__ == '__main__':
     app.secret_key = app.config['SECRET_KEY']
     app.run(debug=True)
