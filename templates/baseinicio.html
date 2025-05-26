@@ -10,35 +10,47 @@
   <!-- Fonts and icons -->
   <script src="{{url_for('static', filename='assets/js/plugin/webfont/webfont.min.js')}}"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["{{url_for('static', filename='assets/css/fonts.min.css')}}"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
-    </script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["{{url_for('static', filename='assets/css/fonts.min.css')}}"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/plugins.min.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/kaiadmin.min.css')}}" />
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="{{url_for('static', filename='assets/css/bootstrap.min.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='assets/css/plugins.min.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='assets/css/kaiadmin.min.css')}}" />
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/demo.css')}}" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel="stylesheet" href="{{url_for('static', filename='assets/css/demo.css')}}" />
 </head>
 
 <body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div id="flash-message" data-category="{{ category }}" data-message="{{ message }}"></div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
+  
+
   <div class="wrapper">
     <!-- Sidebar -->
     <div class="sidebar" data-background-color="dark">
@@ -198,34 +210,22 @@
           <!-- End Logo Header -->
         </div>
         <!-- Navbar Header -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container">
             <a class="navbar-brand" href="{{ url_for('home') }}">Sistema de Evaluación</a>
             <div class="navbar-nav ms-auto">
-                {% if 'user' in session %}
-                <span class="navbar-text me-3">{{ session['user']['email'] }}</span>
-                <a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
+              {% if 'user' in session %}
+              <span class="navbar-text me-3">{{ session['user']['email'] }}</span>
+              <a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
 
-                {% else %}
-                <a class="nav-link" href="{{ url_for('login') }}">Iniciar sesión</a>
-                <a class="nav-link" href="{{ url_for('register') }}">Registrarse</a>
-                {% endif %}
+              {% else %}
+              <a class="nav-link" href="{{ url_for('login') }}">Iniciar sesión</a>
+              <a class="nav-link" href="{{ url_for('register') }}">Registrarse</a>
+              {% endif %}
             </div>
-        </div>
-    </nav>
+          </div>
+        </nav>
 
-        
-    <div class="container mt-4">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-      {% for category, message in messages %}
-      <div id="flash-message" data-category="{{ category }}" data-message="{{ message }}"></div>
-      {% endfor %}
-      {% endif %}
-      {% endwith %}
-      {% block content %}
-      {% endblock %}
-    </div>
 
     <!-- {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -235,52 +235,56 @@
     {% endif %}
     {% endwith %} -->
 
-    <div class="container">
-      <div class="page-inner">
-        <!-- <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"> -->
-        {% block contenido %}
+        <div class="container">
+          <div class="page-inner">
+            
+            {% block contenido %}
 
-        {% endblock %}
-        <!-- </div> -->
-      </div>
+
+            {% endblock %}
+
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid d-flex justify-content-center">
+            <div class="copyright">
+              2025, copyright©
+              <a href="http://www.unan.edu.ni">UNAN - Managua</a>
+            </div>
+          </div>
+        </footer>
+
     </div>
 
-    <footer class="footer">
-      <div class="container-fluid d-flex justify-content-center">
-        <div class="copyright">
-          2025, copyright©
-          <a href="http://www.unan.edu.ni">UNAN - Managua</a>
-        </div>
-      </div>
-    </footer>
+      <!--   Core JS Files   -->
+      <script src="{{url_for('static', filename='assets/js/core/jquery-3.7.1.min.js')}}"></script>
+      <script src="{{url_for('static', filename='assets/js/core/popper.min.js')}}"></script>
+      <script src="{{url_for('static', filename='assets/js/core/bootstrap.min.js')}}"></script>
 
-  </div>
-
-  <!--   Core JS Files   -->
-  <script src="{{url_for('static', filename='assets/js/core/jquery-3.7.1.min.js')}}"></script>
-  <script src="{{url_for('static', filename='assets/js/core/popper.min.js')}}"></script>
-  <script src="{{url_for('static', filename='assets/js/core/bootstrap.min.js')}}"></script>
-
-  <!-- jQuery Scrollbar -->
-  <script src="{{url_for('static', filename='assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-  <!-- jQuery Sparkline -->
-  <script src="{{url_for('static', filename='assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
-  <!-- Chart Circle -->
-  <script src="{{url_for('static', filename='assets/js/plugin/chart-circle/circles.min.js')}}"></script>
-  <!-- Datatables -->
-  <script src="{{url_for('static', filename='assets/js/plugin/datatables/datatables.min.js')}}"></script>
-  <!-- Bootstrap Notify-->
-  <script src="{{url_for('static', filename='assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-  <!-- Sweet Alert -->
-  <script src="{{url_for('static', filename='assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
-  <!-- Kaiadmin JS -->
-  <script src="{{url_for('static', filename='assets/js/kaiadmin.min.js')}}"></script>
-  <!-- Kaiadmin -->
-  <script src="{{url_for('static', filename='assets/js/setting-demo.js')}}"></script>
-  <script src="{{url_for('static', filename='assets/js/demo.js')}}"></script>
-  <!--SIE-->
-  <script src="{{url_for('static', filename='js/estilodt.js')}}"></script>
-  <script src="{{url_for('static', filename='js/estilonivel.js')}}"></script>
+      <!-- jQuery Scrollbar -->
+      <script
+        src="{{url_for('static', filename='assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+      <!-- jQuery Sparkline -->
+      <script
+        src="{{url_for('static', filename='assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
+      <!-- Chart Circle -->
+      <script src="{{url_for('static', filename='assets/js/plugin/chart-circle/circles.min.js')}}"></script>
+      <!-- Datatables -->
+      <script src="{{url_for('static', filename='assets/js/plugin/datatables/datatables.min.js')}}"></script>
+      <!-- Bootstrap Notify-->
+      <script
+        src="{{url_for('static', filename='assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+      <!-- Sweet Alert -->
+      <script src="{{url_for('static', filename='assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
+      <!-- Kaiadmin JS -->
+      <script src="{{url_for('static', filename='assets/js/kaiadmin.min.js')}}"></script>
+      <!-- Kaiadmin -->
+      <script src="{{url_for('static', filename='assets/js/setting-demo.js')}}"></script>
+      <script src="{{url_for('static', filename='assets/js/demo.js')}}"></script>
+      <!--SIE-->
+      <script src="{{url_for('static', filename='js/estilodt.js')}}"></script>
+      <script src="{{url_for('static', filename='js/estilonivel.js')}}"></script>
 </body>
 
 </html>
