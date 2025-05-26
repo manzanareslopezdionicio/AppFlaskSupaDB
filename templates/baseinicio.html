@@ -212,145 +212,116 @@
                       class="avatar-img rounded-circle" />
                   </div>
                   <span class="profile-username">
-                    <span class="op-7">Salir </span>
+                    {% if 'user' in session %}
+                    <span class="navbar-text me-3">{{ session['user']['email'] }}</span>
+                    <a class="nav-link" href="{{ url_for('logout') }}">Cerrar sesión</a>
+                    {% else %}
+                    <a class="nav-link" href="{{ url_for('login') }}">Iniciar sesión</a>
+                    <a class="nav-link" href="{{ url_for('register') }}">Registrarse</a>
+                    {% endif %}
+                    
                     <span class="fw-bold"></span>
                   </span>
                 </a>
-                <ul class="dropdown-menu dropdown-user animated fadeIn">
-                  <div class="dropdown-user-scroll scrollbar-outer">
-                    <li>
-                      <div class="user-box">
-                        <!--
-                        <div class="avatar-lg">
-                          <img src="{{url_for('static', filename='assets/img/profile.jpg')}}" alt="image profile"
-                            class="avatar-img rounded" />
-                        </div> -->
-                        <div class="u-text">
-                          {% if 'user' in session %}
-                          <span class="navbar-text">{{session['user']['email']}} </span>
-                          <a class="nav-link" href="{{url_for('logout')}}">Cerrar sesión</a>
-
-                          {% endif %}
-                          <!-- <h2>Bienvenido, {{ user }}</h2>
-                          <h4>xxxxx</h4>
-                          <p class="text-muted">hello@example.com</p>
-                          <a href="#" class="btn btn-xs btn-secondary btn-sm">Ver Perfil</a>
-                        -->
-                        </div>
-                      </div>
-                    </li>
-                    <!--
-                    <li>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">My Profile</a>
-                      <a class="dropdown-item" href="#">My Balance</a>
-                      <a class="dropdown-item" href="#">Inbox</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Account Setting</a> 
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{url_for('logout')}}">Cerrar sesión</a>
-                    </li>
-                    -->
-                  </div>
-                </ul>
               </li>
-            </ul>
           </div>
-        </nav>
-        <!-- End Navbar -->
+          </ul>
+          </li>
+          </ul>
       </div>
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-      {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
-      {% endfor %}
-      {% endif %}
-      {% endwith %}
+      </nav>
+      <!-- End Navbar -->
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
+    <div class="container">
+      <div class="page-inner">
+        <!-- <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"> -->
+        {% block contenido %}
 
-
-      <div class="container">
-        <div class="page-inner">
-          <!-- <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"> -->
-          {% block contenido %}
-
-          {% endblock %}
-          <!-- </div> -->
-        </div>
+        {% endblock %}
+        <!-- </div> -->
       </div>
-
-      <footer class="footer">
-        <div class="container-fluid d-flex justify-content-center">
-          <div class="copyright">
-            2025, copyright©
-            <a href="http://www.unan.edu.ni">UNAN - Managua</a>
-          </div>
-        </div>
-      </footer>
-
     </div>
 
-    <!-- Custom template | don't include it in your project! -->
-    <div class="custom-template">
-      <div class="title">Settings</div>
-      <div class="custom-content">
-        <div class="switcher">
-          <div class="switch-block">
-            <h4>Logo Header</h4>
-            <div class="btnSwitch">
-              <button type="button" class="selected changeLogoHeaderColor" data-color="dark"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="green"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
-              <br />
-              <button type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
-              <button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
-            </div>
+    <footer class="footer">
+      <div class="container-fluid d-flex justify-content-center">
+        <div class="copyright">
+          2025, copyright©
+          <a href="http://www.unan.edu.ni">UNAN - Managua</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Custom template | don't include it in your project! -->
+  <div class="custom-template">
+    <div class="title">Settings</div>
+    <div class="custom-content">
+      <div class="switcher">
+        <div class="switch-block">
+          <h4>Logo Header</h4>
+          <div class="btnSwitch">
+            <button type="button" class="selected changeLogoHeaderColor" data-color="dark"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+            <br />
+            <button type="button" class="changeLogoHeaderColor" data-color="dark2"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+            <button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
           </div>
-          <div class="switch-block">
-            <h4>Navbar Header</h4>
-            <div class="btnSwitch">
-              <button type="button" class="changeTopBarColor" data-color="dark"></button>
-              <button type="button" class="changeTopBarColor" data-color="blue"></button>
-              <button type="button" class="changeTopBarColor" data-color="purple"></button>
-              <button type="button" class="changeTopBarColor" data-color="light-blue"></button>
-              <button type="button" class="changeTopBarColor" data-color="green"></button>
-              <button type="button" class="changeTopBarColor" data-color="orange"></button>
-              <button type="button" class="changeTopBarColor" data-color="red"></button>
-              <button type="button" class="selected changeTopBarColor" data-color="white"></button>
-              <br />
-              <button type="button" class="changeTopBarColor" data-color="dark2"></button>
-              <button type="button" class="changeTopBarColor" data-color="blue2"></button>
-              <button type="button" class="changeTopBarColor" data-color="purple2"></button>
-              <button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
-              <button type="button" class="changeTopBarColor" data-color="green2"></button>
-              <button type="button" class="changeTopBarColor" data-color="orange2"></button>
-              <button type="button" class="changeTopBarColor" data-color="red2"></button>
-            </div>
+        </div>
+        <div class="switch-block">
+          <h4>Navbar Header</h4>
+          <div class="btnSwitch">
+            <button type="button" class="changeTopBarColor" data-color="dark"></button>
+            <button type="button" class="changeTopBarColor" data-color="blue"></button>
+            <button type="button" class="changeTopBarColor" data-color="purple"></button>
+            <button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+            <button type="button" class="changeTopBarColor" data-color="green"></button>
+            <button type="button" class="changeTopBarColor" data-color="orange"></button>
+            <button type="button" class="changeTopBarColor" data-color="red"></button>
+            <button type="button" class="selected changeTopBarColor" data-color="white"></button>
+            <br />
+            <button type="button" class="changeTopBarColor" data-color="dark2"></button>
+            <button type="button" class="changeTopBarColor" data-color="blue2"></button>
+            <button type="button" class="changeTopBarColor" data-color="purple2"></button>
+            <button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+            <button type="button" class="changeTopBarColor" data-color="green2"></button>
+            <button type="button" class="changeTopBarColor" data-color="orange2"></button>
+            <button type="button" class="changeTopBarColor" data-color="red2"></button>
           </div>
-          <div class="switch-block">
-            <h4>Sidebar</h4>
-            <div class="btnSwitch">
-              <button type="button" class="changeSideBarColor" data-color="white"></button>
-              <button type="button" class="selected changeSideBarColor" data-color="dark"></button>
-              <button type="button" class="changeSideBarColor" data-color="dark2"></button>
-            </div>
+        </div>
+        <div class="switch-block">
+          <h4>Sidebar</h4>
+          <div class="btnSwitch">
+            <button type="button" class="changeSideBarColor" data-color="white"></button>
+            <button type="button" class="selected changeSideBarColor" data-color="dark"></button>
+            <button type="button" class="changeSideBarColor" data-color="dark2"></button>
           </div>
         </div>
       </div>
-      <div class="custom-toggle">
-        <i class="icon-settings"></i>
-      </div>
     </div>
+    <div class="custom-toggle">
+      <i class="icon-settings"></i>
+    </div>
+  </div>
   </div>
   <!--   Core JS Files   -->
   <script src="{{url_for('static', filename='assets/js/core/jquery-3.7.1.min.js')}}"></script>
