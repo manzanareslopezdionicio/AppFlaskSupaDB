@@ -39,7 +39,6 @@
 </head>
 
 <body>
-
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
@@ -50,7 +49,6 @@
     {% block content %}
     {% endblock %}
   
-
   <div class="wrapper">
     <!-- Sidebar -->
     <div class="sidebar" data-background-color="dark">
