@@ -35,12 +35,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
 $(document).ready(function () {
+    $('#topass').on('mouseenter', function () {
+        $(this).css('color', 'blue');
+    }).on('mouseleave', function () {
+        // Si el campo está en modo texto, mantener rojo; si no, negro
+        var passwordField = $('#password');
+        if (passwordField.attr('type') === 'text') {
+            $(this).css('color', 'red');
+        } else {
+            $(this).css('color', 'black');
+        }
+    });
+
     $('#topass').click(function () {
         var passwordField = $('#password');
         var passwordFieldType = passwordField.attr('type');
-
-        // Cambia el color a rojo al hacer clic
 
         if (passwordFieldType === 'password') {
             passwordField.attr('type', 'text');
